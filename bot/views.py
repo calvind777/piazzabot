@@ -20,7 +20,9 @@ def index(request):
         print(request.POST)
         print(request.body)
         print(request.get_host())
+        print(request.content_params)
         if ('entry' in request.content_params and 'messaging' in request.content_params.entry[0]):
+            print('entered')
             page_access_token = PAGE_ACCESS_TOKEN
             senderID = request.content_params.entry[0].messaging[0].sender.id
             msg = {'recipient':{'id':senderID}, 'message':{'text': 'Hi this is PiazzaBot. I don\'t do anything yet'}}
