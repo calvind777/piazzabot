@@ -31,7 +31,7 @@ def index(request):
             senderID = receivedparams['entry'][0]['messaging'][0]['sender']['id']
             msg = {'recipient':{'id':senderID}, 'message':{'text': 'Hi this is PiazzaBot. I don\'t do anything yet'}}
             r = requests.post('https://graph.facebook.com/v2.6/me/messages?access_token='+page_access_token,params=msg)
-            
+            print(r.text)
 
         response = HttpResponse('hi')
         response.status_code=200
