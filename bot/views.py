@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 
+@method_decorator(csrf_exempt)
 def index(request):
     if (request.GET):
         print(request.GET)
