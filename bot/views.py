@@ -9,6 +9,6 @@ def index(request):
         response.status_code=200
         return response
     else:
-        response = httpResponse('hi')
+        response = HttpResponse('hi')
         response.status_code=200
         return response
