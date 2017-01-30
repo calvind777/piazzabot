@@ -7,6 +7,7 @@ import json
 
 @csrf_exempt
 def index(request):
+    receivedparams = json.loads(request.body)
     if (request.method=='GET'):
         print(request.GET)
         print(request.get_host())
@@ -18,12 +19,12 @@ def index(request):
             response = HttpResponse('try again')
             response.status_code=200
             return response
-    else:
+    else if (request.method=='POST' and receivedparams['object']=='page'):
         print(request.POST)
         print(request.body)
         print(request.get_host())
         print(request.content_params)
-        receivedparams = json.loads(request.body)
+        
         print(receivedparams)
         if ('entry' in receivedparams and 'messaging' in receivedparams['entry'][0]):
             print('entered')
@@ -40,3 +41,5 @@ def index(request):
         response = HttpResponse('hi')
         response.status_code=200
         return response
+    else:
+        return HttpResponse
