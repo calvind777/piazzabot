@@ -4,10 +4,14 @@ from django.http import HttpResponse
 def index(request):
     if (request.method=='GET'):
         print(request.GET)
-        
-        response = HttpResponse(request.GET['hub.challenge'])
-        response.status_code=200
-        return response
+        if ('hub.challenge' in request.content_params):
+            response = HttpResponse(request.GET['hub.challenge'])
+            response.status_code=200
+            return response
+        else:
+            response = HttpResponse('try again')
+            response.status_code=200
+            return response
     else:
         print(request.POST)
         print(request.body)
