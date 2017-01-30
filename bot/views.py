@@ -23,10 +23,11 @@ def index(request):
         print(request.get_host())
         print(request.content_params)
         receivedparams = json.loads(request.body)
-        if ('entry' in receivedparams and 'messaging' in receivedparams.entry[0]):
+        print(receivedparams)
+        if ('entry' in receivedparams and 'messaging' in receivedparams['entry'][0]):
             print('entered')
             page_access_token = PAGE_ACCESS_TOKEN
-            senderID = receivedparams.entry[0].messaging[0].sender.id
+            senderID = receivedparams['entry'][0]['messaging'][0]['sender']['id']
             msg = {'recipient':{'id':senderID}, 'message':{'text': 'Hi this is PiazzaBot. I don\'t do anything yet'}}
             r = requests.post('https://graph.facebook.com/v2.6/me/messages?access_token='+page_access_token,params=msg)
             
