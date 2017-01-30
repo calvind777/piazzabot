@@ -9,6 +9,7 @@ def index(request):
         response.status_code=200
         return response
     else:
+        print(request.POST)
         response = HttpResponse('hi')
         response.status_code=200
         return response
