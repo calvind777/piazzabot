@@ -30,6 +30,8 @@ def index(request):
             print('entered')
             page_access_token = settings.PAGE_ACCESS_TOKEN
             senderID = receivedparams['entry'][0]['messaging'][0]['sender']['id']
+            if (senderID == 1430980980279821):
+                return
             print(receivedparams['entry'][0])
             print(receivedparams['entry'][0]['messaging'][0])
             print(senderID)
