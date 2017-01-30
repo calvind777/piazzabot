@@ -33,8 +33,8 @@ def index(request):
             print(receivedparams['entry'][0]['messaging'][0])
             print(senderID)
             headers = {'Content-type': 'application/json'}
-            msg = {'recipient':{'id':senderID}, 'message':{'text': 'Hi this is PiazzaBot. I don\'t do anything yet'}}
-            r = requests.post('https://graph.facebook.com/v2.6/me/messages?access_token='+page_access_token,params=msg,headers=headers)
+            msg = json.dumps({'recipient':{'id':senderID}, 'message':{'text': 'Hi this is PiazzaBot. I don\'t do anything yet'}})
+            r = requests.post('https://graph.facebook.com/v2.6/me/messages?access_token='+page_access_token,data=msg,headers=headers)
             print(r.text)
 
         response = HttpResponse('hi')
