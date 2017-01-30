@@ -1,9 +1,8 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 
-@method_decorator(csrf_exempt)
 def index(request):
-    if (request.GET):
+    if (request.method=='GET'):
         print(request.GET)
         print(request.GET['hub.challenge'])
         response = HttpResponse(request.GET['hub.challenge'])
@@ -11,6 +10,7 @@ def index(request):
         return response
     else:
         print(request.POST)
+        print(request.body)
         response = HttpResponse('hi')
         response.status_code=200
         return response
