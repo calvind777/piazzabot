@@ -4,7 +4,7 @@ from django.http import HttpResponse
 def index(request):
     if (request.method=='GET'):
         print(request.GET)
-        print(request.GET['hub.challenge'])
+        
         response = HttpResponse(request.GET['hub.challenge'])
         response.status_code=200
         return response
