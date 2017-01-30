@@ -29,6 +29,9 @@ def index(request):
             print('entered')
             page_access_token = settings.PAGE_ACCESS_TOKEN
             senderID = receivedparams['entry'][0]['messaging'][0]['sender']['id']
+            print(receivedparams['entry'][0])
+            print(receivedparams['entry'][0]['messaging'][0])
+            print(senderID)
             msg = {'recipient':{'id':senderID}, 'message':{'text': 'Hi this is PiazzaBot. I don\'t do anything yet'}}
             r = requests.post('https://graph.facebook.com/v2.6/me/messages?access_token='+page_access_token,params=msg)
             print(r.text)
