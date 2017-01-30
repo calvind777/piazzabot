@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpRequest
 from django.views.decorators.csrf import csrf_exempt
+from django.conf import settings
 import requests
 import json 
 
@@ -26,7 +27,7 @@ def index(request):
         print(receivedparams)
         if ('entry' in receivedparams and 'messaging' in receivedparams['entry'][0]):
             print('entered')
-            page_access_token = PAGE_ACCESS_TOKEN
+            page_access_token = settings.PAGE_ACCESS_TOKEN
             senderID = receivedparams['entry'][0]['messaging'][0]['sender']['id']
             msg = {'recipient':{'id':senderID}, 'message':{'text': 'Hi this is PiazzaBot. I don\'t do anything yet'}}
             r = requests.post('https://graph.facebook.com/v2.6/me/messages?access_token='+page_access_token,params=msg)
