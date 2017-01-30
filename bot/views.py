@@ -7,4 +7,5 @@ def index(request):
         print(request.GET['hub.challenge'])
         return HttpResponse(request.GET['hub.challenge'])
     else:
+        print(request.POST)
         return HttpResponse('hi')
