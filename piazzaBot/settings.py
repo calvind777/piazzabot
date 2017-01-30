@@ -25,7 +25,7 @@ SECRET_KEY = "l+9_cte$f0wsombj1%k$*y49ik7erp#ti94(46q-**3kaw%9fl"
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-
+PAGE_ACCESS_TOKEN = 'EAARmgkvzqu0BAMkgdFdYZCt3Xato6yrk4IyLNDOuWtyub3lsMZAjtxTNK1zATWKKICkr8ZB4BVZB83CipaiVH8EppsxNS03gvKWoLIueGnXWQBmrocCBJdh6fodx6VkcJcAxjA82G3dV5AZCnkMVLJx7170Wdgj5i2eVVLbRZBggZDZD'
 # Application definition
 
 INSTALLED_APPS = [
