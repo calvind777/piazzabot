@@ -19,7 +19,7 @@ def index(request):
             response = HttpResponse('try again')
             response.status_code=200
             return response
-    else if (request.method=='POST' and receivedparams['object']=='page'):
+    elif (request.method=='POST' and receivedparams['object']=='page'):
         print(request.POST)
         print(request.body)
         print(request.get_host())
