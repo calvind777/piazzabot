@@ -5,7 +5,10 @@ def index(request):
     if (request.GET):
         print(request.GET)
         print(request.GET['hub.challenge'])
-        return HttpResponse(request.GET['hub.challenge'])
+        response = HttpResponse(request.GET['hub.challenge'])
+        response.status_code=200
+        return response
     else:
-        print(request.POST)
-        return HttpResponse('hi')
+        response = httpResponse('hi')
+        response.status_code=200
+        return response
