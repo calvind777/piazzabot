@@ -39,7 +39,18 @@ def index(request):
             msg = json.dumps({'recipient':{'id':senderID}, 'message':{'text': 'Hi this is PiazzaBot. I\'m your personal'
                 ' Piazza assistant who\'ll automatically notify you when new instructor or pinned notes are posted.'
             }})
+            signinmsg = json.dumps({'recipient':{'id':senderID}, 'buttons':[
+                  {
+                    "type":"web_url",
+                    "url":"https://piazza-bot.herokuapp.com/bot/signin/",
+                    "title":"Log in to Piazza",
+                    "webview_height_ratio": "compact"
+                  }
+                ]
+
+            })
             r = requests.post(message_url+page_access_token,data=msg,headers=headers)
+            s = requests.post(message_url+page_access_token,data=signinmsg,headers=headers)
             print(r.text)
 
         response = HttpResponse('hi')
