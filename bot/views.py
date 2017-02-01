@@ -2,13 +2,16 @@ from django.shortcuts import render
 from django.http import HttpResponse, HttpRequest
 from django.views.decorators.csrf import csrf_exempt
 from django.conf import settings
+from django.template import loader
 import requests
 import json 
 
 @csrf_exempt
 def index(request):
     message_url = 'https://graph.facebook.com/v2.6/me/messages?access_token='
+
     if (request.method=='GET'):
+        signintemplate = loader.get_template('bot/index.html')
         print(message_url)
         print(request.GET)
         print(request.get_host())
@@ -19,7 +22,7 @@ def index(request):
         else:
             response = HttpResponse('try again')
             response.status_code=200
-            return response
+            return HttpResponse(signintemplate.render(request))
     elif (request.method=='POST' and json.loads(request.body)['object']=='page'):
         print(request.POST)
         print(request.body)
@@ -34,7 +37,7 @@ def index(request):
             print(senderID)
             headers = {'Content-type': 'application/json'}
             msg = json.dumps({'recipient':{'id':senderID}, 'message':{'text': 'Hi this is PiazzaBot. I\'m your personal'
-                ' Piazza assistant who\'ll automatically notify you when new instructor or pinned notes are posted'
+                ' Piazza assistant who\'ll automatically notify you when new instructor or pinned notes are posted.'
             }})
             r = requests.post(message_url+page_access_token,data=msg,headers=headers)
             print(r.text)
@@ -46,4 +49,5 @@ def index(request):
         return HttpResponse
 
 def signin(request):
-    return HttpResponse('sign in page')
+    signintemplate = loader.get_template('bot/index.html')
+    return HttpResponse(signintemplate.render(request))

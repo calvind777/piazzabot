@@ -29,6 +29,7 @@ PAGE_ACCESS_TOKEN = 'EAARmgkvzqu0BAMkgdFdYZCt3Xato6yrk4IyLNDOuWtyub3lsMZAjtxTNK1
 # Application definition
 
 INSTALLED_APPS = [
+    'bot.apps.BotConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
