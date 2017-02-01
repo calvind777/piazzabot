@@ -7,8 +7,9 @@ import json
 
 @csrf_exempt
 def index(request):
-    
+    message_url = 'https://graph.facebook.com/v2.6/me/messages?access_token='
     if (request.method=='GET'):
+        print(message_url)
         print(request.GET)
         print(request.get_host())
         if ('hub.challenge' in request.content_params):
@@ -22,22 +23,20 @@ def index(request):
     elif (request.method=='POST' and json.loads(request.body)['object']=='page'):
         print(request.POST)
         print(request.body)
-        print(request.get_host())
-        print(request.content_params)
         receivedparams = json.loads(request.body)
         print(receivedparams)
         if ('entry' in receivedparams and 'messaging' in receivedparams['entry'][0]):
             print('entered')
             page_access_token = settings.PAGE_ACCESS_TOKEN
             senderID = receivedparams['entry'][0]['messaging'][0]['sender']['id']
-            if (senderID == 1430980980279821):
-                return
             print(receivedparams['entry'][0])
             print(receivedparams['entry'][0]['messaging'][0])
             print(senderID)
             headers = {'Content-type': 'application/json'}
-            msg = json.dumps({'recipient':{'id':senderID}, 'message':{'text': 'Hi this is PiazzaBot. I don\'t do anything yet'}})
-            r = requests.post('https://graph.facebook.com/v2.6/me/messages?access_token='+page_access_token,data=msg,headers=headers)
+            msg = json.dumps({'recipient':{'id':senderID}, 'message':{'text': 'Hi this is PiazzaBot. I\'m your personal'
+                ' Piazza assistant who\'ll automatically notify you when new instructor or pinned notes are posted'
+            }})
+            r = requests.post(message_url+page_access_token,data=msg,headers=headers)
             print(r.text)
 
         response = HttpResponse('hi')
@@ -45,3 +44,6 @@ def index(request):
         return response
     else:
         return HttpResponse
+
+def signin(request):
+    return HttpResponse('sign in page')
