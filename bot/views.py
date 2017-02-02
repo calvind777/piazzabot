@@ -24,7 +24,7 @@ def index(request):
             response.status_code=200
             return HttpResponse(signintemplate.render(request))
     elif (request.method=='POST' and json.loads(request.body)['object']=='page'):
-        print(request.POST)
+        
         print(request.body)
         receivedparams = json.loads(request.body)
         print(receivedparams)
@@ -32,9 +32,7 @@ def index(request):
             print('entered')
             page_access_token = settings.PAGE_ACCESS_TOKEN
             senderID = receivedparams['entry'][0]['messaging'][0]['sender']['id']
-            print(receivedparams['entry'][0])
-            print(receivedparams['entry'][0]['messaging'][0])
-            print(senderID)
+            
             headers = {'Content-type': 'application/json'}
             msg = json.dumps({'recipient':{'id':senderID}, 'message':{'text': 'Hi this is PiazzaBot. I\'m your personal'
                 ' Piazza assistant who\'ll automatically notify you when new instructor or pinned notes are posted.'
@@ -51,7 +49,7 @@ def index(request):
             })
             r = requests.post(message_url+page_access_token,data=msg,headers=headers)
             s = requests.post(message_url+page_access_token,data=signinmsg,headers=headers)
-            print(r.text)
+            print(s.text)
 
         response = HttpResponse('hi')
         response.status_code=200
